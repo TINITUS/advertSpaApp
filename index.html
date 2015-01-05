@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="AdvertsApp">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Adverts</title>
+
+		<!-- Bootstrap CSS -->
+		<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+		<style type="text/css">
+			header.jumbotron{
+				color: white;
+				background-image: url('assets/imgs/out_of_focus.jpg');
+				background-size: cover;
+				background-repeat: no-repeat;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="jumbotron">
+			<div class="container text-center">
+				<h1>ADS - Home!</h1>				
+			</div>
+		</header>	
+		<main class="container">
+			<div class="row">
+				<aside class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+					<div class="panel panel-default">
+						<div class="panel-body">
+						   Left side bar Menu
+						</div>
+					</div>
+				</aside>
+				<section class="col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-controller="AdsHomeCtrl as ads">
+					<div class="list-group">
+						<div class="list-group-item" ng-repeat="ad in ads.allAds">
+							<div class="row">
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+									<h3>{{ad.title}} <em class="pull-right">{{ad.date | date:'d-MMM-yyyy'}}</em></h3>		
+								</div>								
+							</div>
+							<div class="row">
+								<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+	      							<img ng-src="{{ad.imageDataUrl || ads.imagePlaceholder}}" alt="..." class="img-thumbnail" width="150">
+								</div>
+								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+									<blockquote class="text-justify">{{ad.text | limitTo:150}}...</blockquote>
+								</div>	
+							</div>							            				
+						</div>
+					</div>
+					<nav>
+					  <ul class="pagination" ng-if="ads.totalPages > 1">
+					    <li>
+					      <a href="javascript:void(0);" aria-label="Previous" ng-click="ads.getAds(((ads.page > 1)? (ads.page - 1) : 1)">
+					        <span aria-hidden="true">&laquo;</span>
+					      </a>
+					    </li>
+					    <li ng-repeat="pNum in ads.pagination" ng-class="(pNum == ads.page)?'active': ''"><a ng-click="ads.getAds(pNum)" href="javascript:void(0);">{{pNum}}</a></li>					    
+					    <li>
+					      <a href="javascript:void(0);" aria-label="Next" ng-click="ads.getAds(((ads.page > 1)? (ads.page - 1) : 1)">
+					        <span aria-hidden="true">&raquo;</span>
+					      </a>
+					    </li>
+					  </ul>
+					</nav>
+				</section>
+				<aside class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+					<div class="panel panel-default">
+						<div class="panel-body">
+						    <div class="row">
+						   		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						   			<h4>Categories</h4>	
+						   		</div>
+						   	</div>
+						   	<div class="row">
+						   		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						   			<h4>Towns</h4>
+						   		</div>
+						    </div>
+						</div>
+					</div>					
+				</aside>
+			</div>
+		</main>
+		
+		<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+		<script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+		<script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>		
+		<script type="text/javascript" src="application/app.module.js"></script>
+	</body>
+</html>
