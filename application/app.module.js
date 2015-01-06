@@ -12,7 +12,7 @@
 		self.page = 1;
 		self.totalPages = 0;
 		self.itemsPP = 5;
-		
+		self.categories = [];
 
 		$http.get(baseUrl+"Categories").success(function (data) {
 			if(data){
@@ -26,19 +26,34 @@
 			}
 		});
 
-		self.getAds = function (pageNum) {			
-			$http.get(baseUrl+"Ads",{params:{"StartPage":pageNum,"PageSize":self.itemsPP}})
-			  .success(function (data) {
-				if(data.ads.length){
-					self.page = pageNum;
-					self.pagination = [];				
-					self.totalPages = data.numPages;
-					self.allAds = data.ads;
-					for (var i = 1; i <= self.totalPages; i++) {					
-						self.pagination.push(i);
-					};
-				}
-			});	
+		self.getAds = function (pageNum) {
+			if(typeof pageNum  != 'string'){				
+				$http.get(baseUrl+"Ads",{params:{"StartPage":pageNum,"PageSize":self.itemsPP}})
+				  .success(function (data) {
+					if(data.ads.length){
+						self.page = pageNum;
+						self.pagination = [];				
+						self.totalPages = data.numPages;
+						self.allAds = data.ads;
+						for (var i = 1; i <= self.totalPages; i++) {					
+							self.pagination.push(i);
+						};
+					}
+				});
+			} else {
+				self.page = (pageNum === 'prev')? (((self.page - 1) <= 0 )? 1 : self.page - 1 ) : (((self.page + 1) >= self.totalPages)? self.totalPages : self.page + 1);
+				$http.get(baseUrl+"Ads",{params:{"StartPage":self.page,"PageSize":self.itemsPP}})
+				  .success(function (data) {
+					if(data.ads.length){					
+						self.pagination = [];				
+						self.totalPages = data.numPages;
+						self.allAds = data.ads;
+						for (var i = 1; i <= self.totalPages; i++) {					
+							self.pagination.push(i);
+						};
+					}
+				});
+			}	
 		};
 		self.getAds(1);
 	}]);
