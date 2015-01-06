@@ -22,13 +22,18 @@
 				background-size: cover;
 				background-repeat: no-repeat;
 			}
+			main > .row{
+				margin-bottom: 60px;
+			}
 			.right-panel > .panel > .panel-body{
 				height:200px;
 				overflow: auto;
 			}
 			.right-panel input[type=checkbox]{
+				width:1px;
+				height: 1px;
 				opacity: 0;
-				-moz-opacity: 0;							
+				-moz-opacity: 0;
 			}
 			.right-panel input[type=checkbox]:checked ~ div {
 				color: white;
@@ -36,98 +41,34 @@
 			}
 			.checkLabel{
 				position: relative;
-				margin-left: -20px;				
+				margin-left: -20px;
 				text-align: center;
 			}
-
+			#mainFooter{
+				position: fixed;
+				bottom: 0;
+				width: 100%;
+				margin-bottom: 0;
+			}
 		</style>
 	</head>
 	<body>
 		<header class="jumbotron">
 			<div class="container text-center">
-				<h1>ADS - Home!</h1>				
+				<h1>ADS - Home!</h1>
 			</div>
-		</header>	
-		<main class="container"  ng-controller="AdsHomeCtrl as ads">
-			<div class="row">
-				<aside class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-					<div class="panel panel-default">
-						<div class="panel-body">
-						   Left side bar Menu
-						</div>
-					</div>
-				</aside>
-				<section class="col-xs-6 col-sm-6 col-md-6 col-lg-6" >
-					<div class="list-group">
-						<div class="list-group-item" ng-repeat="ad in ads.allAds | filter:categories">
-							<div class="row">
-								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-									<h3>{{ad.title}} <em class="pull-right">{{ad.date | date:'d-MMM-yyyy'}}</em></h3>		
-								</div>								
-							</div>
-							<div class="row">
-								<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-	      							<img ng-src="{{ad.imageDataUrl || ads.imagePlaceholder}}" alt="..." class="img-thumbnail" width="150">
-								</div>
-								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-									<blockquote class="text-justify">{{ad.text | limitTo:150}}...</blockquote>
-								</div>	
-							</div>							            				
-						</div>
-					</div>
-					<nav>
-					  <ul class="pagination" ng-if="ads.totalPages > 1">
-					    <li>
-					      <a href="javascript:void(0);" aria-label="Previous" ng-click="ads.getAds('prev')">
-					        <span aria-hidden="true">&laquo;</span>
-					      </a>
-					    </li>
-					    <li ng-repeat="pNum in ads.pagination" ng-class="(pNum == ads.page)?'active': ''"><a ng-click="ads.getAds(pNum)" href="javascript:void(0);">{{pNum}}</a></li>					    
-					    <li>
-					      <a href="javascript:void(0);" aria-label="Next" ng-click="ads.getAds('next')">
-					        <span aria-hidden="true">&raquo;</span>
-					      </a>
-					    </li>
-					  </ul>
-					</nav>
-				</section>
-				<aside class="col-xs-3 col-sm-3 col-md-3 col-lg-3 right-panel">
-					<div class="panel panel-default">
-						<div class="panel-heading">Categories {{categories}}</div>
-						<div class="panel-body">
-						    <div class="row">
-						   		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-repeat="cat in ads.categories">
-						   			<div class="checkbox">
-						   				<label>
-						   					<input type="checkbox" id="cat{{cat.id}}" ng-model="categories[$index]" name="categories[]" value="{{cat.id}}">
-						   					<div class="checkLabel">{{cat.name}}</div>						   					
-						   				</label>
-						   			</div>
-						   		</div>						   		
-						   	</div>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">Towns</div>
-						<div class="panel-body">
-						    <div class="row">
-						   		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-repeat="town in ads.towns">
-						   			<div class="checkbox">
-						   				<label for="town{{town.id}}">
-						   					<input type="checkbox" id="town{{town.id}}" name="towns[]" value="{{town.id}}">
-						   					<div class="checkLabel">{{town.name}}</div>						   					
-						   				</label>
-						   			</div>
-						   		</div>						   		
-						    </div>
-						</div>
-					</div>					
-				</aside>
-			</div>
-		</main>		
+		</header>
+
+		<main class="container" ng-view></main>
+		<footer class="well text-center" id="mainFooter">
+			© 2014 by Software University Foundation, No Rights Reserved
+		</footer>
 		<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
 		<script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
-		<script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>		
+		<script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
+		<script type="text/javascript" src="application/home/home.ctrl.js"></script>
+		<script type="text/javascript" src="application/login/loginCtrl.js"></script>
+		<script type="text/javascript" src="application/register/registerCtrl.js"></script>
 		<script type="text/javascript" src="application/app.module.js"></script>
 	</body>
 </html>
