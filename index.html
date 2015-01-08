@@ -8,13 +8,16 @@
 
 		<!-- Bootstrap CSS -->
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-
+		
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
+		<!-- angular-growl css -->
+		<link href="bower_components/angular-growl/build/angular-growl.min.css" rel="stylesheet">
+		<!-- Custom Syles -->
 		<style type="text/css">
 			header.jumbotron{
 				color: white;
@@ -50,6 +53,15 @@
 				width: 100%;
 				margin-bottom: 0;
 			}
+			input.ng-dirty.ng-invalid{
+				border-color: red;
+			}
+			span.reqMark{
+				color: red;
+			}
+			div.growl{
+				z-index: 9;
+			}
 		</style>
 	</head>
 	<body>
@@ -65,7 +77,8 @@
 		</footer>
 		<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
 		<script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
-		<script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
+		<script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>		
+        <script src="bower_components/angular-growl/build/angular-growl.min.js"></script>
 		<script type="text/javascript" src="application/home/home.ctrl.js"></script>
 		<script type="text/javascript" src="application/login/loginCtrl.js"></script>
 		<script type="text/javascript" src="application/register/registerCtrl.js"></script>

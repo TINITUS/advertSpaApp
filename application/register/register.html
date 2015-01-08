@@ -1,3 +1,4 @@
+<div growl></div>
 <div class="row">
 	<aside class="col-xs-3 col-sm-3 col-md-3 col-lg-3">		
 		<div class="panel panel-default">						
@@ -16,26 +17,36 @@
 	<section class="col-xs-9 col-sm-9 col-md-9 col-lg-9" >
 		<form action="" method="POST" role="form">
 			<legend >Register</legend>
-			<div class="row">						
+			<div class="row">
 				<div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
-					<label for="">Username</label>
-					<input type="text" class="form-control" id="username" ng-model="register.user.username">
-					<label for="">Password</label>
-					<input type="password" class="form-control" id="pass" ng-model="register.user.password">					
+					<label for="username">Username <span class="reqMark">*</span></label>
+					<input type="text" class="form-control" id="username" ng-model="register.user.username" required>
+					<label for="pass">Password <span class="reqMark">*</span></label>
+					<input type="password" class="form-control" id="pass" ng-model="register.user.password" required>
+					<label for="email">Email <span class="reqMark">*</span></label>
+					<input type="email" class="form-control" id="email" ng-model="register.user.email" required>
+					<label for="phone">Phone</label>
+					<input type="text" class="form-control" id="phone" ng-model="register.user.phone">
 				</div>
 				<div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
-					<label for="">Full Name</label>
-					<input type="text" class="form-control" id="name" ng-model="register.user.name">					
-					<label for="">Confirm password</label>
-					<input type="password" class="form-control" id="passConfirm" ng-match="register.user.password" ng-model="register.user.confirmPassword">				
+					<label for="name">Full Name <span class="reqMark">*</span></label>
+					<input type="text" class="form-control" id="name" ng-model="register.user.name" required>
+					<label for="passConfirm">Confirm password <span class="reqMark">*</span></label>
+					<input type="password" class="form-control" id="passConfirm" compare-to="register.user.password" ng-model="register.user.confirmPassword" required>
+					<label for="town">Town</label>
+					<select class="form-control" ng-model="register.user.town" ng-options="town.id as town.name for town in register.towns">
+						<option value="" disabled="disabled">Select Town</option>
+					</select>
 				</div>				
 			</div>
 			<div class="row">						
-				<div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<button type="submit" class="btn btn-primary">Submit</button>
+				<div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					<button type="button" class="btn btn-primary" ng-click="register.onRegisterUser()">Submit</button>
+				</div>
+				<div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					<a href="#/log-in" class="btn btn-success">Log-in</a>
 				</div>
 			</div>
 		</form>
-		<p>{{register.user}}</p>
 	</section>				
 </div>
