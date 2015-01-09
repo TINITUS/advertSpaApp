@@ -27,7 +27,7 @@ var registerModule = angular.module('registerModule', ['angular-growl']).control
 			data  : self.user
 		})
 		.success(function(data){
-			self.user = {};
+			self.user = {username:"", password:"", confirmPassword:"", name:"", email:"", phone:"", town:""};
 			console.log(data);
 			growl.addSuccessMessage('registration was successful! Please, Log-in!');
 		})

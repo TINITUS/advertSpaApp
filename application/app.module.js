@@ -5,7 +5,9 @@
 			'ui.bootstrap',
 			'homeModule',
 			'loginModule',
-			'registerModule']);
+			'registerModule', 
+			'angular-loading-bar'
+			]);
 		
 	advertsApp.config(['$routeProvider',function($routeProvider) {
 		$routeProvider.when('/',{

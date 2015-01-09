@@ -1,4 +1,3 @@
-<div growl></div>
 <div class="row">
 	<aside class="col-xs-3 col-sm-3 col-md-3 col-lg-3">		
 		<div class="panel panel-default">						
@@ -15,7 +14,7 @@
 		</div>
 	</aside>
 	<section class="col-xs-9 col-sm-9 col-md-9 col-lg-9" >
-		<form action="" method="POST" role="form">
+		<form role="form" ng-submit="register.onRegisterUser()">
 			<legend >Register</legend>
 			<div class="row">
 				<div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -41,7 +40,7 @@
 			</div>
 			<div class="row">						
 				<div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
-					<button type="button" class="btn btn-primary" ng-click="register.onRegisterUser()">Submit</button>
+					<button type="submit" class="btn btn-primary">Submit</button>
 				</div>
 				<div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
 					<a href="#/log-in" class="btn btn-success">Log-in</a>
