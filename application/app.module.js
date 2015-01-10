@@ -1,12 +1,9 @@
-(function (){
-
 	var advertsApp = angular.module('AdvertsApp', [
 			'ngRoute',
 			'ui.bootstrap',
-			'homeModule',
-			'loginModule',
-			'registerModule', 
-			'angular-loading-bar'
+			'homeModule',			
+			'angular-loading-bar',
+			'angular-growl'
 			]);
 		
 	advertsApp.config(['$routeProvider',function($routeProvider) {
@@ -50,4 +47,4 @@
 	};
 	 
 	advertsApp.directive("compareTo", compareTo);
-}());
+	advertsApp.constant('baseUrl', 'http://softuni-ads.azurewebsites.net/api/');

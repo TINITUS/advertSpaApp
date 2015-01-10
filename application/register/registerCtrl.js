@@ -1,12 +1,7 @@
-/**
-* register Module
-*
-* Description
-* register module
-*/
-var registerModule = angular.module('registerModule', ['angular-growl']).controller('registerCtrl', ['$http','growl', function($http, growl){
-	var self = this,
-		baseUrl = 'http://softuni-ads.azurewebsites.net/api/';
+"use strict";
+
+advertsApp.controller('registerCtrl', ['$http','growl','authService','$location', 'baseUrl', function($http, growl, auth, $location, baseUrl){
+	var self = this;
 
 	self.user = {};
 	self.towns = [];
@@ -17,31 +12,26 @@ var registerModule = angular.module('registerModule', ['angular-growl']).control
 		}
 	});
 
-	self.onRegisterUser = function(){		
-		$http({
-			method  : "POST",
-			url     : baseUrl+'user/register',
-			headers : {
-				'Content-Type' : 'application/json; charset=utf-8'
+	self.onRegisterUser = function() { 
+		auth.registerUser(self.user).then(
+			function(data){
+				self.user = {username:"", password:"", confirmPassword:"", name:"", email:"", phone:"", town:""};
+				console.log(data);
+				$location.path('/log-in');
+				growl.addSuccessMessage('registration was successful! Please, Log-in!');
 			},
-			data  : self.user
-		})
-		.success(function(data){
-			self.user = {username:"", password:"", confirmPassword:"", name:"", email:"", phone:"", town:""};
-			console.log(data);
-			growl.addSuccessMessage('registration was successful! Please, Log-in!');
-		})
-		.error(function(data){
-			if(data.modelState['']){
-				for(var i = 0; i<data.modelState[''].length; i++){
-					growl.addErrorMessage(data.modelState[''][i]);
+			function(error){
+				if(error.modelState['']){
+					for(var i = 0; i<error.modelState[''].length; i++){
+						growl.addErrorMessage(error.modelState[''][i]);
+					}
+				} else {
+					console.log(error.modelState.model);
+					for(var model in error.modelState){
+						growl.addErrorMessage(error.modelState[model][0]);					
+					}
 				}
-			} else {
-				console.log(data.modelState.model);
-				for(var model in data.modelState){
-					growl.addErrorMessage(data.modelState[model][0]);					
-				}
-			}
-		});
-	}
+			}			
+		);
+	};
 }]);

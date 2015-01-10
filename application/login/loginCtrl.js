@@ -1,30 +1,21 @@
-/**
-* login Module
-*
-* Description
-* login module
-*/
-var loginModule = angular.module('loginModule', ['angular-growl']).controller('loginCtrl', ['$http', 'growl', function($http, growl){
-	var self = this, 
-		baseUrl = 'http://softuni-ads.azurewebsites.net/api/';
+"use strict";
+
+advertsApp.controller('loginCtrl', ['$http', 'growl', 'authService','$location', function($http, growl, auth, $location){
+	var self = this;
 
 	self.user = {username:"", password:""};
-	self.onLoginUser = function(){		
-		$http({
-			method  : "POST",
-			url     : baseUrl+'user/login',
-			headers : {
-				'Content-Type' : 'application/json; charset=utf-8'
+	self.onLoginUser = 	function() { 
+		auth.userLogin(self.user).then(
+			function(data){
+				growl.addSuccessMessage("Hello " + data.username);
+				$location.path("/home");
 			},
-			data  : self.user
-		})
-		.success( function (data) {
-			console.log(data);
-		})
-		.error( function (data) {
-			if(data.error_description){
-				growl.addErrorMessage(data.error_description);
+			function(error){
+				if(error.error_description){
+				growl.addErrorMessage(error.error_description);
 			}
-		});
-	}
+			}
+		);
+	};
+
 }]);
