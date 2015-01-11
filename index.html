@@ -34,13 +34,19 @@
 				height:200px;
 				overflow: auto;
 			}
-			.right-panel input[type=checkbox]{
+			.right-panel input[type=radio]{
 				width:1px;
 				height: 1px;
 				opacity: 0;
 				-moz-opacity: 0;
+
 			}
-			.right-panel input[type=checkbox]:checked ~ div {
+			.right-panel input[type=radio] ~ div {
+				color: #333;
+				background-color: white;
+			}
+
+			.right-panel input[type=radio]:checked ~ div {
 				color: white;
    				background: green;
 			}
@@ -54,6 +60,7 @@
 				bottom: 0;
 				width: 100%;
 				margin-bottom: 0;
+				z-index: 99;
 			}
 			input.ng-dirty.ng-invalid{
 				border-color: red;
@@ -68,25 +75,32 @@
 	</head>
 	<body>
 		<div growl></div>
-		<header class="jumbotron">
-			<div class="container text-center">
-				<h1>ADS - Home!</h1>
-			</div>
-		</header>
 
-		<main class="container" ng-view></main>
+		<div ng-view></div>		
 		<footer class="well text-center" id="mainFooter">
 			© 2014 by Software University Foundation, No Rights Reserved
 		</footer>
 		<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
 		<script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+		<script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 		<script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
-		<script type="text/javascript" src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
-        <script src="bower_components/angular-growl/build/angular-growl.min.js"></script>
-		<script type="text/javascript" src="application/home/home.ctrl.js"></script>		
-		<script type="text/javascript" src="application/app.module.js"></script>
+		<script type="text/javascript" src="bower_components/angular-resource/angular-resource.min.js"></script>
+		<script type="text/javascript" src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>		
+        <script type="text/javascript" src="bower_components/angular-growl/build/angular-growl.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>				
+		<script type="text/javascript" src="application/app.js"></script>
+		<script type="text/javascript" src="application/controllers/home.ctrl.js"></script>
+		<script type="text/javascript" src="application/controllers/registerCtrl.js"></script>
+		<script type="text/javascript" src="application/controllers/loginCtrl.js"></script>
+		<script type="text/javascript" src="application/controllers/categoriesCtrl.js"></script>
+		<script type="text/javascript" src="application/controllers/townsCtrl.js"></script>
+		<script type="text/javascript" src="application/directives/categories.js"></script>
+		<script type="text/javascript" src="application/directives/towns.js"></script>
+		<script type="text/javascript" src="application/services/categoriesData.js"></script>
+		<script type="text/javascript" src="application/services/townsData.js"></script>
+		<script type="text/javascript" src="application/services/userData.js"></script>
 		<script type="text/javascript" src="application/services/authService.js"></script>
-		<script type="text/javascript" src="application/register/registerCtrl.js"></script>
-		<script type="text/javascript" src="application/login/loginCtrl.js"></script>
+		<script type="text/javascript" src="application/services/adsFilter.js"></script>
+		
 	</body>
 </html>

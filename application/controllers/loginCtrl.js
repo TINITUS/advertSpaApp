@@ -1,13 +1,14 @@
 "use strict";
 
-advertsApp.controller('loginCtrl', ['$http', 'growl', 'authService','$location', function($http, growl, auth, $location){
-	var self = this;
-
+advertsApp.controller('loginCtrl', ['$scope','$http', '$location', 'growl', 'userData', 'authService', function($scope, $http, $location, growl, userData, authService){
+	var self = $scope;
+	self.pageTitle = "Log-in";
 	self.user = {username:"", password:""};
 	self.onLoginUser = 	function() { 
-		auth.userLogin(self.user).then(
+		userData.userLogin(self.user).then(
 			function(data){
 				growl.addSuccessMessage("Hello " + data.username);
+				authService.saveUserData(data);				
 				$location.path("/home");
 			},
 			function(error){

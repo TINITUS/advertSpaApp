@@ -1,8 +1,8 @@
 "use strict";
 
-advertsApp.controller('registerCtrl', ['$http','growl','authService','$location', 'baseUrl', function($http, growl, auth, $location, baseUrl){
-	var self = this;
-
+advertsApp.controller('registerCtrl', ['$scope', '$http', '$location', 'growl', 'userData', 'baseUrl', function($scope, $http, $location, growl, userData, baseUrl){
+	var self = $scope;
+	self.pageTitle = "Register";
 	self.user = {};
 	self.towns = [];
 
@@ -13,7 +13,7 @@ advertsApp.controller('registerCtrl', ['$http','growl','authService','$location'
 	});
 
 	self.onRegisterUser = function() { 
-		auth.registerUser(self.user).then(
+		userData.registerUser(self.user).then(
 			function(data){
 				self.user = {username:"", password:"", confirmPassword:"", name:"", email:"", phone:"", town:""};
 				console.log(data);

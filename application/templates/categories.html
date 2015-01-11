@@ -1,0 +1,21 @@
+<div class="panel panel-default">
+	<div class="panel-heading">Categories</div>
+	<div class="panel-body">
+	    <div class="row">
+	   		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+	   			<div class="radio">
+	   				<label for="cat_all">
+	   					<input type="radio" checked  id="cat_all" name="categories" ng-change="onCatSelected()" value="" ng-model="selectedCategory">
+	   					<div class="checkLabel">All</div>					   					
+	   				</label>
+	   			</div>
+	   			<div class="radio" ng-repeat="cat in categories">
+	   				<label for="cat_{{cat.id}}">
+	   					<input type="radio" id="cat_{{cat.id}}" name="categories" ng-change="onCatSelected()" ng-value="{{cat.id}}" ng-model="$parent.selectedCategory">
+	   					<div class="checkLabel">{{cat.name}}</div>
+	   				</label>
+	   			</div>
+	   		</div>						   		
+	   	</div>
+	</div>
+</div>

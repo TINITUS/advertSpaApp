@@ -1,0 +1,21 @@
+<div class="panel panel-default">
+	<div class="panel-heading">Towns</div>
+	<div class="panel-body">
+	    <div class="row">
+	   		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">	   		
+	   			<div class="radio">
+	   				<label for="town_all">
+	   					<input type="radio" checked  id="town_all" name="towns" ng-change="onTownSelected()" value="" ng-model="selectedTown">
+	   					<div class="checkLabel">All</div>						   					
+	   				</label>
+	   			</div>	   		
+	   			<div class="radio"  ng-repeat="town in towns">
+	   				<label for="town{{town.id}}">
+	   					<input type="radio" id="town{{town.id}}" name="towns" ng-change="onTownSelected()" ng-value="{{town.id}}" ng-model="$parent.selectedTown">
+	   					<div class="checkLabel">{{town.name}}</div>						   					
+	   				</label>
+	   			</div>
+	   		</div>						   		
+	    </div>
+	</div>
+</div>	

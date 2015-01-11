@@ -1,0 +1,62 @@
+<header class="jumbotron">
+	<div class="container text-center">
+		<h1>ADS - {{pageTitle}}</h1>
+	</div>
+</header>
+<main class="container">
+	<div class="row">
+		<aside class="col-xs-3 col-sm-3 col-md-3 col-lg-3">		
+			<div class="panel panel-default">						
+				<div class="panel-heading">
+					<h3 class="panel-title" ng-if="user == null">Navigation</h3>
+					<h3 class="panel-title" ng-if="user != null">
+						Hello <strong>{{user}}</strong>
+						<span class="pull-right">
+							<a href="javascript: void(0);" class="btn btn-info btn-sm" ng-click="logOut()">Log-out</a>
+						</span>
+					</h3>
+				</div>							  						
+				<div class="panel-body">
+				    <ul class="nav nav-pills nav-stacked" ng-if="user == null">
+						<li role="presentation" class="active"><a href="#/">Home</a></li>
+						<li role="presentation"><a href="#/log-in">Log-in</a></li>
+						<li role="presentation"><a href="#/register">Register</a></li>
+					</ul>
+					<ul class="nav nav-pills nav-stacked" ng-if="user != null">
+						<li role="presentation" class="active"><a href="#/">Home</a></li>
+						<li role="presentation"><a href="#/user/ads">My Ads</a></li>
+						<li role="presentation"><a href="#/user/new">Publish New Ad</a></li>
+						<li role="presentation"><a href="#/user/profile">Edit Profile</a></li>
+					</ul>
+				</div>
+			</div>
+		</aside>
+		<section class="col-xs-6 col-sm-6 col-md-6 col-lg-6" >
+			<div class="list-group">
+				<div class="list-group-item" ng-repeat="ad in allAds">
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<h3>{{ad.title}} <em class="pull-right">{{ad.date | date:'d-MMM-yyyy'}}</em></h3>		
+						</div>								
+					</div>
+					<div class="row">
+
+						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<img ng-src="{{ad.imageDataUrl || imagePlaceholder}}" alt="..." class="img-thumbnail" width="150">
+						</div>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<blockquote class="text-justify">{{ad.text | limitTo:150}}...</blockquote>
+						</div>	
+					</div>							            				
+				</div>
+			</div>
+			<nav class="text-center">
+				<pagination total-items="totalItems" boundary-links="true" items-per-page="itemsPP" max-size="6" ng-model="page" ng-if="totalPages > 1" ng-change="getAds(page)"></pagination>
+			</nav>
+		</section>
+		<aside class="col-xs-3 col-sm-3 col-md-3 col-lg-3 right-panel">
+			<categories></categories>
+			<towns></towns>
+		</aside>
+	</div>
+</main>
