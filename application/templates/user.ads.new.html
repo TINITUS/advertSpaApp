@@ -1,0 +1,59 @@
+<header class="jumbotron">
+	<div class="container text-center">
+		<h1>ADS - {{pageTitle}}</h1>
+	</div>
+</header>
+<main class="container">
+	<div class="row">
+		<aside class="col-xs-3 col-sm-3 col-md-3 col-lg-3 left-panel">		
+			<div class="panel panel-default">						
+				<div class="panel-heading">					
+					<h3 class="panel-title row">
+						<span class="col-md-6">Hello <strong>{{user}}</strong></span>
+						<span class="col-md-6">
+							<a href="javascript: void(0);" class="btn btn-info btn-sm" ng-click="logOut()">Log-out</a>
+						</span>
+					</h3>
+				</div>							  						
+				<div class="panel-body">				   
+					<ul class="nav nav-pills nav-stacked">
+						<li role="presentation"><a href="#/">Home</a></li>
+						<li role="presentation"><a href="#/user/ads">My Ads</a></li>
+						<li role="presentation" class="active"><a href="#/user/ads/new">Publish New Ad</a></li>
+						<li role="presentation"><a href="#/user/profile">Edit Profile</a></li>
+					</ul>
+				</div>
+			</div>
+		</aside>
+		<section class="col-xs-9 col-sm-9 col-md-9 col-lg-9" >
+			<form role="form" ng-submit="onSumbmitAd()">
+				<div class="row">
+					<div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">					
+						<label for="title">Title <span class="reqMark">*</span></label>
+						<input type="text" class="form-control" id="title" ng-model="ad.title" required>						
+						<label for="category">Category</label>
+						<select class="form-control" ng-model="ad.categoryId" ng-options="category.id as category.name for category in categories">
+							<option value="" disabled="disabled">Select Category</option>
+						</select>
+						<label for="town">Town</label>
+						<select class="form-control" ng-model="ad.townId" ng-options="town.id as town.name for town in towns">
+							<option value="" disabled="disabled">Select Town</option>
+						</select>
+					</div>
+					<div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">						
+						<label for="image">Image</label>
+						<input type="file" ng-model-instant id="image" onchange="angular.element(this).scope().setFiles(this)" />
+						<img width="100" ng-src="{{ad.imageDataUrl}}"><br/>
+						<label for="Text">Text <span class="reqMark">*</span></label>
+						<textarea class="form-control" id="text" ng-model="ad.text" required></textarea>
+					</div>
+				</div>
+				<div class="row">						
+					<div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</div>
+				</div>
+			</form>
+		</section>		
+	</div>
+</main>

@@ -1,0 +1,104 @@
+<header class="jumbotron">
+    <div class="container text-center">
+        <h1>ADS - {{pageTitle}}</h1>
+    </div>
+</header>
+<main class="container">
+    <div class="row">
+        <aside class="col-xs-3 col-sm-3 col-md-3 col-lg-3 left-panel">      
+            <div class="panel panel-default">                       
+                <div class="panel-heading">                 
+                    <h3 class="panel-title row">
+                        <span class="col-md-6">Hello <strong>{{username}}</strong></span>
+                        <span class="col-md-6">
+                            <a href="javascript: void(0);" class="btn btn-info btn-sm" ng-click="logOut()">Log-out</a>
+                        </span>
+                    </h3>
+                </div>                                                  
+                <div class="panel-body">                   
+                    <ul class="nav nav-pills nav-stacked">
+                        <li role="presentation"><a href="#/">Home</a></li>
+                        <li role="presentation"><a href="#/user/ads">My Ads</a></li>
+                        <li role="presentation"><a href="#/user/ads/new">Publish New Ad</a></li>
+                        <li role="presentation"  class="active"><a href="#/user/profile">Edit Profile</a></li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+        <section class="col-xs-9 col-sm-9 col-md-9 col-lg-9" >
+        <form ng-submit="editUserProfile(user, userEditProfileForm)" id="user-edit-profile-form" name="userEditProfileForm">
+            <fieldset>
+                <legend>Edit Profile</legend>
+                <div class="container-fluid">
+                    <div class="form-group row">
+                        <label for="username-input" class="col-md-2 control-label">Name: </label>
+                        <input type="text" ng-model="user.name" id="username-input" required="required"
+                               class="form-control col-md-10"/>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="user-email-input">Email: </label>
+                        <input type="text" ng-model="user.email" id="user-email-input" required="required"
+                               ng-pattern="emailPattern" class="form-control col-md-10"/>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="user-phone-input">Phone: </label>
+                        <input type="text" ng-model="user.phoneNumber" id="user-phone-input" required="required"
+                               class="form-control col-md-10"/>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="town">Town</label>                                                 
+                        <select ng-model="user.townId" name="userTownSelect" id="user-town-select" class="form-control" ng-options="town.id as town.name for town in towns">
+                            <option value="" disabled="disabled">Select Town</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group pull-left col-md-12 col-sm-12 col-xs-12">
+                        <div>
+                            <button type="submit" class="btn form-btn col-md-4" ng-disabled="userEditProfileForm.$invalid">
+                                Update
+                            </button>
+                            <a href="#/user/home" class="btn form-btn col-md-4 col-md-offset-1">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+
+        <form ng-submit="changeUserPassword(pass, userChangePasswordForm)" id="user-change-password-form" name="userChangePasswordForm">
+            <fieldset>
+                <legend>Change Password</legend>
+                <div class="container-fluid">
+                    <div class="form-group row">
+                        <label for="old-password-input" class="col-md-3 control-label">Old password: </label>
+                        <input type="password" ng-model="pass.oldPassword" id="old-password-input" required="required"
+                               class="form-control col-md-9"/>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="new-password-input" class="col-md-3 control-label">New password: </label>
+                        <input type="password" ng-model="pass.newPassword" id="new-password-input" required="required"
+                               ng-pattern="passwordPattern" class="form-control col-md-9"/>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="confirm-password-input" class="col-md-3 control-label">Confirm new password: </label>
+                        <input type="password" ng-model="pass.confirmPassword" id="confirm-password-input"
+                               required="required" class="form-control col-md-9"/>
+                    </div>
+
+                    <div class="form-group pull-left col-md-12 col-sm-12 col-xs-12">
+                        <div>
+                            <button ng-disabled="userChangePasswordForm.$invalid || pass.newPassword != pass.confirmPassword" class="btn form-btn col-md-7">
+                                Change Password
+                            </button>
+                            <a href="#/user/home" class="btn form-btn col-md-4 col-md-offset-1">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+
+
+            </fieldset>
+        </form>

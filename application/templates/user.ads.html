@@ -19,39 +19,69 @@
 					<ul class="nav nav-pills nav-stacked">
 						<li role="presentation"><a href="#/">Home</a></li>
 						<li role="presentation" class="active"><a href="#/user/ads">My Ads</a></li>
-						<li role="presentation"><a href="#/user/new">Publish New Ad</a></li>
+						<li role="presentation"><a href="#/user/ads/new">Publish New Ad</a></li>
 						<li role="presentation"><a href="#/user/profile">Edit Profile</a></li>
 					</ul>
 				</div>
 			</div>
 			<user-ads-menu></user-ads-menu>
 		</aside>
-		<section class="col-xs-6 col-sm-6 col-md-6 col-lg-6" >
+		<section class="col-xs-9 col-sm-9 col-md-9 col-lg-9" >
+			<div class="alert alert-info" ng-if="totalItems <= 0">				
+				<strong>You do not have any ads yet!</strong>
+			</div>
 			<div class="list-group">
 				<div class="list-group-item" ng-repeat="ad in allAds">
 					<div class="row">
-						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<h3>{{ad.title}} <em class="pull-right">{{ad.date | date:'d-MMM-yyyy'}}</em></h3>		
-						</div>								
-					</div>
-					<div class="row">
-
-						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-								<img ng-src="{{ad.imageDataUrl || imagePlaceholder}}" alt="..." class="img-thumbnail" width="150">
-						</div>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<blockquote class="text-justify">{{ad.text | limitTo:150}}...</blockquote>
-						</div>	
-					</div>							            				
+							<div class="row">
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+									<h3>{{ad.title}} <em class="pull-right">{{ad.date | date:'d-MMM-yyyy'}}</em></h3>		
+								</div>								
+							</div>
+							<div class="row">
+
+								<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+										<img ng-src="{{ad.imageDataUrl || imagePlaceholder}}" alt="..." class="img-thumbnail" width="150">
+								</div>
+								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+									<blockquote class="text-justify">{{ad.text | limitTo:150}}...</blockquote>
+								</div>	
+							</div>
+						</div>
+						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+							<div class="row">
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+									<div class="panel" ng-class="{'panel-info' : ad.status == 'Inactive', 'panel-success': ad.status == 'Published', 'panel-warning': ad.status == 'WaitingApproval', 'panel-danger': ad.status =='Rejected' }">
+										  <div class="panel-heading">
+												<h3 class="panel-title">{{ad.status}}</h3>
+										  </div>
+										  <div class="panel-body">										  		                    
+												<ul class="nav nav-pills nav-stacked">
+													<li role="presentation">
+														<a href="javascript: void(0);" ng-if="ad.status=='WaitingApproval' || ad.status=='Published'" ng-click="deactivateAd(ad)" class="btn form-btn col-md-12">Deactivate</a>
+								                    </li>
+													<li role="presentation">
+														<a href="#/user/ads/edit/{{ad.id}}" ng-if="ad.status=='Inactive'" class="btn form-btn col-md-12">Edit</a>
+													</li>
+													<li role="presentation">
+														<a href="javascript: void(0);" ng-if="ad.status=='Inactive'" ng-click="publishAgain(ad)" class="btn form-btn col-md-12">Publish Again</a>
+													</li>
+													<li role="presentation">
+														<a href="#/user/ads/delete/{{ad.id}}" ng-if="ad.status=='Inactive'" class="btn form-btn col-md-12">Delete</a>
+													</li>
+												</ul>
+										  </div>
+									</div>
+								</div>
+							</div>
+						</div>							
+					</div>					            				
 				</div>
 			</div>
 			<nav class="text-center">
 				<pagination total-items="totalItems" boundary-links="true" items-per-page="itemsPP" max-size="6" ng-model="page" ng-if="totalPages > 1" ng-change="getAds(page)"></pagination>
 			</nav>
-		</section>
-		<aside class="col-xs-3 col-sm-3 col-md-3 col-lg-3 right-panel">
-			<categories></categories>
-			<towns></towns>
-		</aside>
+		</section>		
 	</div>
 </main>

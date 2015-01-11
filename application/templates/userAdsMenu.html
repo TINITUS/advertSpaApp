@@ -10,7 +10,7 @@
 	   			<div class="radio"  ng-repeat="status in statuses">
 	   				<label for="status{{status.id}}">
 	   					<input type="radio" id="status{{status.id}}" name="statuses" ng-change="onStatusSelected()" ng-value="{{status.id}}" ng-model="$parent.selectedStatus">
-	   					<div class="checkLabel">{{status.name}}</div>						   					
+	   					<div class="checkLabel" style="text-align:left;">{{status.name}}</div>						   					
 	   				</label>
 	   			</div>
 	   		</div>						   		

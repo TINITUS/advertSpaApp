@@ -43,22 +43,26 @@ advertsApp.config(['$routeProvider', 'localStorageServiceProvider', 'growlProvid
 		controller: 'UserAdsCtrl',
 		resolve: routePermissions.isLogged
 	});
-	/*$routeProvider.when('/user/ads/new',{
+	$routeProvider.when('/user/ads/new',{
 		templateUrl: 'application/templates/user.ads.new.html',
 		controller: 'UserAdsNewCtrl',
+		resolve: routePermissions.isLogged
 	});
-	$routeProvider.when('user/ads/edit/:id',{
+	$routeProvider.when('/user/ads/delete/:id',{
+		templateUrl: 'application/templates/user.ads.delete.html',
+		controller: 'UserDeleteAdCtrl',
+		resolve: routePermissions.isLogged
+	});	
+	$routeProvider.when('/user/ads/edit/:id',{
 		templateUrl: 'application/templates/user.ads.edit.html',
 		controller: 'UserAdsEditCtrl',
+		resolve: routePermissions.isLogged
 	});
-	$routeProvider.when('user/ads/delete/:id',{
-		templateUrl: 'application/templates/user.ads.delete.html',
-		controller: 'UserAdsDeleteCtrl',
-	});
-	$routeProvider.when('user/profile',{
+	$routeProvider.when('/user/profile',{
 		templateUrl: 'application/templates/user.profile.html',
 		controller: 'UserProfileCtrl',
-	});*/
+		resolve: routePermissions.isLogged
+	});
     $routeProvider.when('/unauthorized', {
         template: '<div><p>Your request was rejected. You might not be authorized to view this content. <br><a href="#/log-in">Please log in!</a></p></div>'
     });

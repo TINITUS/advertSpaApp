@@ -1,0 +1,61 @@
+<header class="jumbotron">
+    <div class="container text-center">
+        <h1>ADS - {{pageTitle}}</h1>
+    </div>
+</header>
+<main class="container">
+    <div class="row">
+        <aside class="col-xs-3 col-sm-3 col-md-3 col-lg-3 left-panel">      
+            <div class="panel panel-default">                       
+                <div class="panel-heading">                 
+                    <h3 class="panel-title row">
+                        <span class="col-md-6">Hello <strong>{{user}}</strong></span>
+                        <span class="col-md-6">
+                            <a href="javascript: void(0);" class="btn btn-info btn-sm" ng-click="logOut()">Log-out</a>
+                        </span>
+                    </h3>
+                </div>                                                  
+                <div class="panel-body">                   
+                    <ul class="nav nav-pills nav-stacked">
+                        <li role="presentation"><a href="#/">Home</a></li>
+                        <li role="presentation"><a href="#/user/ads">My Ads</a></li>
+                        <li role="presentation" class="active"><a href="#/user/ads/new">Publish New Ad</a></li>
+                        <li role="presentation"><a href="#/user/profile">Edit Profile</a></li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+        <section class="col-xs-9 col-sm-9 col-md-9 col-lg-9" >
+            <form ng-submit="deleteUserAd(ad)" class="form-horizontal col-md-offset-1 col-md-8 col-sm-offset-1 col-sm-8 col-xs-12" id="user-confirm-delete-ad-form" name="userConfirmDeleteAdForm">
+                <fieldset>
+                    <legend>Confirm Deleting Ad?</legend>
+
+                    <div class="row">
+                        <h4 class="col-md-9">{{ad.title}}</h4>
+                        <time class="col-md-3 pull-right">{{ad.date | date:'d-MMM-yyyy'}}</time>
+                    </div>
+                    <div class="row">
+                        <div class="ad-img-container col-md-3 pull-left">
+                            <img ng-src="{{ad.imageDataUrl || imagePlaceholder}}" alt="..." class="img-thumbnail" width="150">
+                        </div>
+                        <div class="col-md-9">
+                            <p class="ad-text">{{ad.text}}</p>
+
+                            <p class="ad-category on-background"><span>Category: </span>{{ad.category}}</p>
+
+                            <p class="ad-town on-background"><span>Town: </span>{{ad.town}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <div>
+                                <button type="submit" class="btn form-btn btn-info">Delete</button>
+                                <a href="#/user/ads" class="btn form-btn">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </section>
+    </div>
+</main>
