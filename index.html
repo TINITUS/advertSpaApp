@@ -34,19 +34,19 @@
 				height:200px;
 				overflow: auto;
 			}
-			.right-panel input[type=radio]{
+			.right-panel input[type=radio], .left-panel input[type=radio]{
 				width:1px;
 				height: 1px;
 				opacity: 0;
 				-moz-opacity: 0;
 
 			}
-			.right-panel input[type=radio] ~ div {
+			.right-panel input[type=radio] ~ div, .left-panel input[type=radio] ~ div {
 				color: #333;
 				background-color: white;
 			}
 
-			.right-panel input[type=radio]:checked ~ div {
+			.right-panel input[type=radio]:checked ~ div, .left-panel input[type=radio]:checked ~ div {
 				color: white;
    				background: green;
 			}
@@ -94,9 +94,13 @@
 		<script type="text/javascript" src="application/controllers/loginCtrl.js"></script>
 		<script type="text/javascript" src="application/controllers/categoriesCtrl.js"></script>
 		<script type="text/javascript" src="application/controllers/townsCtrl.js"></script>
+		<script type="text/javascript" src="application/controllers/userAdsCtrl.js"></script>
+		<script type="text/javascript" src="application/controllers/userAdsMenuCtrl.js"></script>
 		<script type="text/javascript" src="application/directives/categories.js"></script>
 		<script type="text/javascript" src="application/directives/towns.js"></script>
+		<script type="text/javascript" src="application/directives/userAdsMenu.js"></script>
 		<script type="text/javascript" src="application/services/categoriesData.js"></script>
+		<script type="text/javascript" src="application/services/userAdsService.js"></script>
 		<script type="text/javascript" src="application/services/townsData.js"></script>
 		<script type="text/javascript" src="application/services/userData.js"></script>
 		<script type="text/javascript" src="application/services/authService.js"></script>

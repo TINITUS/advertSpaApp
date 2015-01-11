@@ -5,31 +5,26 @@
 </header>
 <main class="container">
 	<div class="row">
-		<aside class="col-xs-3 col-sm-3 col-md-3 col-lg-3">		
+		<aside class="col-xs-3 col-sm-3 col-md-3 col-lg-3 left-panel">		
 			<div class="panel panel-default">						
 				<div class="panel-heading">					
-					<h3 class="panel-title" ng-if="user == null">Navigation</h3>
-					<h3 class="panel-title row" ng-if="user != null">
+					<h3 class="panel-title row">
 						<span class="col-md-6">Hello <strong>{{user}}</strong></span>
 						<span class="col-md-6">
 							<a href="javascript: void(0);" class="btn btn-info btn-sm" ng-click="logOut()">Log-out</a>
 						</span>
 					</h3>
 				</div>							  						
-				<div class="panel-body">
-				    <ul class="nav nav-pills nav-stacked" ng-if="user == null">
-						<li role="presentation" class="active"><a href="#/">Home</a></li>
-						<li role="presentation"><a href="#/log-in">Log-in</a></li>
-						<li role="presentation"><a href="#/register">Register</a></li>
-					</ul>
-					<ul class="nav nav-pills nav-stacked" ng-if="user != null">
-						<li role="presentation" class="active"><a href="#/">Home</a></li>
-						<li role="presentation"><a href="#/user/ads">My Ads</a></li>
+				<div class="panel-body">				   
+					<ul class="nav nav-pills nav-stacked">
+						<li role="presentation"><a href="#/">Home</a></li>
+						<li role="presentation" class="active"><a href="#/user/ads">My Ads</a></li>
 						<li role="presentation"><a href="#/user/new">Publish New Ad</a></li>
 						<li role="presentation"><a href="#/user/profile">Edit Profile</a></li>
 					</ul>
 				</div>
 			</div>
+			<user-ads-menu></user-ads-menu>
 		</aside>
 		<section class="col-xs-6 col-sm-6 col-md-6 col-lg-6" >
 			<div class="list-group">

@@ -10,7 +10,6 @@ advertsApp.controller('homeCtrl', ['$scope','$http','baseUrl', 'userData', 'auth
 	self.totalItems = 0;
 	self.itemsPP = 5;
 	self.user = (authService.getUserData() != null || authService.getUserData() != undefined) ? authService.getUserData().username: null;
-	console.log(!!authService.getUserData());
 	self.logOut = function(){
 		userData.userLogOut().then(
 			function (data){
@@ -25,37 +24,21 @@ advertsApp.controller('homeCtrl', ['$scope','$http','baseUrl', 'userData', 'auth
 	};
 
 	$scope.getAds = function getAds (pageNum, filterParams) {
-		var filterParams = filterParams || {};
-		if(typeof pageNum  != 'string'){				
-			$http.get(baseUrl+"Ads",{params:{"StartPage":pageNum,"PageSize":self.itemsPP, "CategoryId" : filterParams.categoryId, "TownId": filterParams.townId}})
-			  .success(function (data) {
-			  	self.allAds = [];
-				if(data.ads.length){
-					self.page = pageNum;
-					self.pagination = [];				
-					self.totalPages = data.numPages;
-					self.totalItems = data.numItems;
-					self.allAds = data.ads;
-					for (var i = 1; i <= self.totalPages; i++) {					
-						self.pagination.push(i);
-					};
-				}
-			});
-		} else {
-			self.page = (pageNum === 'prev')? (((self.page - 1) <= 0 )? 1 : self.page - 1 ) : (((self.page + 1) >= self.totalPages)? self.totalPages : self.page + 1);
-			$http.get(baseUrl+"Ads",{params:{"StartPage":self.page,"PageSize":self.itemsPP, "CategoryId" : filterParams.categoryId, "TownId": filterParams.townId}})
-			  .success(function (data) {
-			  	self.allAds = [];
-				if(data.ads.length){					
-					self.pagination = [];				
-					self.totalPages = data.numPages;
-					self.allAds = data.ads;
-					for (var i = 1; i <= self.totalPages; i++) {					
-						self.pagination.push(i);
-					};
-				}
-			});
-		}	
+		var filterParams = filterParams || {};						
+		$http.get(baseUrl+"Ads",{params:{"StartPage":pageNum,"PageSize":self.itemsPP, "CategoryId" : filterParams.categoryId, "TownId": filterParams.townId}})
+		  .success(function (data) {
+		  	self.allAds = [];
+			if(data.ads.length){
+				self.page = pageNum;
+				self.pagination = [];				
+				self.totalPages = data.numPages;
+				self.totalItems = data.numItems;
+				self.allAds = data.ads;
+				for (var i = 1; i <= self.totalPages; i++) {					
+					self.pagination.push(i);
+				};
+			}
+		});	
 	};
 
 	$scope.getAds(1);
