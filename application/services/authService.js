@@ -1,6 +1,6 @@
 "use strict";
 
-advertsApp.factory('authService', ['$q','localStorageService', function($q, ls){
+advertsApp.factory('authService', ['$q', 'localStorageService', function($q, ls){
 	var key  = 'currentUser',
 		headers = {};	
 

@@ -1,10 +1,13 @@
-advertsApp.controller('UserAdsMenuCtrl', ['$scope', function($scope){
+advertsApp.controller('UserAdsMenuCtrl', ['$scope', '$rootScope', function($scope, $rootScope){
 	$scope.selectedStatus = '1';
 	$scope.statuses = [
-		{id:'1', name:"All"},
-		{id:'2', name:"Published"},
-		{id:'3', name:"Waiting Approval"},
-		{id:'4', name:"Inactive"},
-		{id:'5', name:"Rejected"}
-	]	
+		{id:'', name:"All"},
+		{id:'Published', name:"Published"},
+		{id:'WaitingApproval', name:"Waiting Approval"},
+		{id:'Inactive', name:"Inactive"},
+		{id:'Rejected', name:"Rejected"}
+	];
+	$scope.onStatusSelected = function(){		
+		$rootScope.$broadcast('statClicked', $scope.selectedStatus);
+	}	
 }])

@@ -22,8 +22,8 @@ advertsApp.controller('UserAdsCtrl', ['$scope','$location', 'userAdsService', 'a
 		);
 	};
 	$scope.getAds = function getAds (pageNum) {
-		console.log(pageNum);
-		userAdsService.getUserAds({startPage: pageNum, pageSize: 5})
+		console.log($scope.adsStatus);
+		userAdsService.getUserAds({startPage: pageNum, pageSize: 5, status : $scope.adsStatus})
 		.then(
 	        function getUserAdsSuccess(data) {
 	        	console.log(data);
@@ -70,10 +70,9 @@ advertsApp.controller('UserAdsCtrl', ['$scope','$location', 'userAdsService', 'a
     };
 
 	$scope.getAds(1);
-	$scope.$on('townClicked', function(event, data){
-		$scope.getAds(1, adsFilter.getFlterParam());
-	})
-	$scope.$on('catClicked', function(event, data){
-		$scope.getAds(1, adsFilter.getFlterParam());
+	$scope.$on('statClicked', function(event, data){
+		console.log(data);
+		$scope.adsStatus = data;
+		$scope.getAds(1);
 	})
 }])

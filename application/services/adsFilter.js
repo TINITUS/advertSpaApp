@@ -1,17 +1,17 @@
-"use strict";
+'use strict';
 
-advertsApp.factory('adsFilter', function(){
+advertsApp.factory('adsFilter', function () {
 	var filterParams = {};
 	
-	function filterByTown(town){
+	function filterByTown(town) {
 		filterParams.townId = town;
 	}
 
-	function filterByCategory(category){		
+	function filterByCategory(category) {
 		filterParams.categoryId = category;
 	}
 
-	function getFlterParam () {
+	function getFlterParam() {
 		return filterParams;
 	}
 
@@ -20,4 +20,4 @@ advertsApp.factory('adsFilter', function(){
 		filterByTown : filterByTown,
 		getFlterParam : getFlterParam
 	};
-})
+});
